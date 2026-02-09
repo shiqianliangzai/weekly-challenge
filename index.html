@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 每周挑战 - 打破惯性，活出精彩</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #FF6B6B; --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        body { font-family: -apple-system, sans-serif; background: #F7F9FC; color: #2C3E50; }
+        header { background: var(--gradient); color: white; padding: 50px 20px; text-align: center; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .week-badge { background: #FFE66D; color: #333; padding: 8px 20px; border-radius: 20px; display: inline-block; margin-top: 15px; font-weight: bold; }
+        .stats { background: white; padding: 15px; display: flex; justify-content: center; gap: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); flex-wrap: wrap; }
+        .stats span { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        nav { background: white; padding: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; }
+        nav button { padding: 8px 18px; border: 2px solid var(--primary); background: transparent; color: var(--primary); border-radius: 20px; cursor: pointer; transition: 0.3s; }
+        nav button.active, nav button:hover { background: var(--primary); color: white; }
+        main { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section h2 { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid var(--primary); display: flex; align-items: center; gap: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 3px 15px rgba(0,0,0,0.08); border-left: 4px solid var(--primary); transition: 0.3s; cursor: pointer; position: relative; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .card-num { width: 30px; height: 30px; line-height: 30px; text-align: center; background: var(--primary); color: white; border-radius: 50%; display: inline-block; font-weight: bold; margin-bottom: 10px; }
+        .card h3 { margin-bottom: 8px; font-size: 1.1rem; }
+        .card p { color: #666; font-size: 0.9rem; line-height: 1.6; }
+        .card-tags { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .card-tags span { background: #f0f0f0; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; color: #666; }
+        .diff { position: absolute; top: 15px; right: 15px; font-size: 1rem; }
+        .weekly { background: linear-gradient(135deg, #ffecd2, #fcb69f); border-radius: 20px; padding: 30px; margin-bottom: 40px; text-align: center; }
+        .weekly h2 { color: #c0392b; margin-bottom: 20px; }
+        .weekly-box { background: white; border-radius: 15px; padding: 25px; max-width: 700px; margin: 0 auto; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .weekly-box h3 { color: #e74c3c; font-size: 1.4rem; margin-bottom: 15px; }
+        .weekly-meta { display: flex; gap: 20px; justify-content: center; margin: 15px 0; color: #666; flex-wrap: wrap; }
+        .weekly ul { text-align: left; max-width: 500px; margin: 20px auto; }
+        .weekly li { margin: 10px 0; padding-left: 25px; position: relative; }
+        .weekly li::before { content: '✓'; position: absolute; left: 0; color: #27ae60; }
+        .join-btn { background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; padding: 12px 35px; font-size: 1.1rem; border-radius: 25px; cursor: pointer; margin-top: 15px; }
+        .join-btn:hover { transform: scale(1.05); }
+        footer { background: #2C3E50; color: white; text-align: center; padding: 25px; margin-top: 40px; }
+        @media (max-width: 768px) { header h1 { font-size: 1.8rem; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌟 每周挑战</h1>
+        <p>打破惯性 · 突破舒适区 · 活出精彩</p>
+        <div class="week-badge">📅 每周日发布新挑战</div>
+    </header>
+    <div class="stats">
+        <div><span>100+</span> 累计挑战</div>
+        <div><span>52</span> 周/年</div>
+        <div><span>5</span> 分类</div>
+    </div>
+    <nav>
+        <button class="active" onclick="show('all')">全部</button>
+        <button onclick="show('exp')">🧪 生活实验</button>
+        <button onclick="show('imp')">🧠 自我提升</button>
+        <button onclick="show('hea')">🧘‍♀️ 身心重置</button>
+        <button onclick="show('soc')">🤝 社交连接</button>
+        <button onclick="show('cre')">🎨 创造力</button>
+    </nav>
+    <main>
+        <!-- 本周挑战 -->
+        <section class="weekly">
+            <h2>🔥 第 <span id="weekNum">1</span> 周挑战</h2>
+            <div class="weekly-box">
+                <h3 id="title">加载中...</h3>
+                <p id="desc">正在获取本周挑战...</p>
+                <div class="weekly-meta">
+                    <span>📅 <span id="dateRange"></span></span>
+                    <span>⭐ 难度：<span id="difficulty"></span></span>
+                </div>
+                <ul id="rulesList"></ul>
+                <button class="join-btn" onclick="alert('🎉 开始你的挑战之旅！')">🚀 加入挑战</button>
+            </div>
+        </section>
+        
+        <!-- 分类 -->
+        <section class="section active" id="exp"><h2>🧪 生活实验（22个）</h2><div class="grid" id="expGrid"></div></section>
+        <section class="section" id="imp"><h2>🧠 自我提升（20个）</h2><div class="grid" id="impGrid"></div></section>
+        <section class="section" id="hea"><h2>🧘‍♀️ 身心重置（20个）</h2><div class="grid" id="heaGrid"></div></section>
+        <section class="section" id="soc"><h2>🤝 社交连接（15个）</h2><div class="grid" id="socGrid"></div></section>
+        <section class="section" id="cre"><h2>🎨 创造力（20个）</h2><div class="grid" id="creGrid"></div></section>
+    </main>
+    <footer>
+        <p>🌟 每周挑战 - 让生活更有趣 | 每周日更新</p>
+    </footer>
+
+    <script>
+    const data = {
+        exp: [
+            {n:1,t:"极简生存周",d:"生活费限制在200元以内（必要账单除外），挑战消费降级。",g:["💰省钱","📉降级"],l:"⭐⭐⭐"},
+            {n:2,t:"断舍离周",d:"每天扔掉/捐赠/卖掉3件不需要的东西，总计21件。",g:["📦整理","🧹清理"],l:"⭐⭐"},
+            {n:3,t:"不买周",d:"除了新鲜食材和必需品，禁止购买任何实物商品。",g:["🚫克制","🛒消费"],l:"⭐⭐⭐"},
+            {n:4,t:"数字游民周",d:"下班后彻底不打开电脑，只用手机接电话回必要消息。",g:["📱排毒","💻屏幕"],l:"⭐⭐⭐"},
+            {n:5,t:"反手周",d:"用非惯用手刷牙、拿筷子、开门、写字，激活大脑！",g:["👐挑战","🧠大脑"],l:"⭐⭐"},
+            {n:6,t:"无镜子周",d:"尽量不照镜子（除整理仪容外），减少外貌焦虑。",g:["💆自爱","🪞外貌"],l:"⭐"},
+            {n:7,t:"随机路线周",d:"每天走一条从未走过的路，或提前一站下车。",g:["🗺️探索","🚶步行"],l:"⭐"},
+            {n:8,t:"必须说是周",d:"对合理邀约强迫自己说Yes，参考《Yes Man》。",g:["🙆开放","🤝社交"],l:"⭐⭐⭐"},
+            {n:9,t:"静音周",d:"全周手机静音（除电话外），专注当下。",g:["🔇静音","📵专注"],l:"⭐⭐"},
+            {n:10,t:"零外卖周",d:"全周不点外卖，自己做饭或外出用餐。",g:["🍳做饭","🥗健康"],l:"⭐⭐⭐"},
+            {n:11,t:"单色穿搭周",d:"全周只穿一种颜色（黑白灰除外），极简美学。",g:["👔穿搭","🎨极简"],l:"⭐"},
+            {n:12,t:"现金生活周",d:"全周只用现金付款，感受真实的消费感。",g:["💵现金","💳支付"],l:"⭐⭐"},
+            {n:13,t:"早睡早起周",d:"每晚10点睡，早上6点起，重建生物钟。",g:["😴睡眠","⏰作息"],l:"⭐⭐⭐"},
+            {n:14,t:"独处周",d:"每天至少独处2小时，静静与自己相处。",g:["🧘独处","💭思考"],l:"⭐⭐"},
+            {n:15,t:"环保先锋周",d:"自带水杯、购物袋、餐具，不用一次性塑料。",g:["🌍环保","♻️可持续"],l:"⭐"},
+            {n:16,t:"拒绝社交媒体周",d:"全周不用微博抖音小红书（工作除外）。",g:["📱戒网","⏰时间"],l:"⭐⭐⭐"},
+            {n:17,t:"逆时作息周",d:"尝试相反作息（如晚睡晚起），体验不同时间感。",g:["🌙作息","🕐时间"],l:"⭐⭐"},
+            {n:18,t:"零语音周",d:"全周只用文字交流，不发语音。",g:["💬文字","✍️表达"],l:"⭐"},
+            {n:19,t:"陌生人对话周",d:"每天主动与至少一个陌生人交谈。",g:["🗣️社交","🤝连接"],l:"⭐⭐"},
+            {n:20,t:"完全素食周",d:"全周不吃任何肉类，体验素食生活。",g:["🥬素食","🍃健康"],l:"⭐⭐⭐"},
+            {n:21,t:"沉默周",d:"每天有2小时完全不说话，用行动代替语言。",g:["🤫沉默","🧘专注"],l:"⭐⭐"},
+            {n:22,t:"一物多用周",d:"用现有物品解决新问题，不买新东西。",g:["🔄创意","💡解决"],l:"⭐"}
+        ],
+        imp: [
+            {n:23,t:"TED马拉松周",d:"每天看1个TED演讲，写下3个金句。",g:["🎓学习","💡思考"],l:"⭐⭐"},
+            {n:24,t:"纪录片周",d:"只看高质量纪录片，如《地球脉动》《河西走廊》。",g:["🎬深度","📺视频"],l:"⭐⭐"},
+            {n:25,t:"一书一周",d:"一周内读完一本200页左右的书。",g:["📖阅读","📚文学"],l:"⭐⭐"},
+            {n:26,t:"外语磨耳朵周",d:"手机系统改为外语，或每天听30分钟外语播客。",g:["🗣️语言","🎧听力"],l:"⭐⭐"},
+            {n:27,t:"早起鸟周",d:"每天早起1小时，做一直想做但没时间的事。",g:["⏰高效","🚀行动"],l:"⭐⭐⭐"},
+            {n:28,t:"Excel侠周",d:"每天学1个软件快捷键或高级功能。",g:["💼办公","📊Excel"],l:"⭐⭐"},
+            {n:29,t:"新闻斋戒周",d:"完全不看热搜，只关注身边真实发生的事。",g:["🧘专注","📰新闻"],l:"⭐⭐"},
+            {n:30,t:"技能突击周",d:"选新技能（PS/Python/吉他），每天学1小时。",g:["🎯技能","💪学习"],l:"⭐⭐⭐"},
+            {n:31,t:"记忆训练周",d:"每天背诵5个新单词或1首短诗。",g:["🧠记忆","📝背诵"],l:"⭐⭐"},
+            {n:32,t:"公开演讲周",d:"每天对镜子练习演讲5分钟。",g:["🎤演讲","💬表达"],l:"⭐⭐⭐"},
+            {n:33,t:"理财学习周",d:"每天学习1个理财知识点。",g:["💰理财","📈财务"],l:"⭐⭐"},
+            {n:34,t:"写作日更周",d:"每天写500字以上，日记/随想/文章。",g:["✍️写作","📓日记"],l:"⭐⭐⭐"},
+            {n:35,t:"知识输出周",d:"学到的知识向他人讲解或写成笔记。",g:["📤输出","🎓教学"],l:"⭐⭐"},
+            {n:36,t:"专注力训练周",d:"每天1次25分钟番茄钟专注训练。",g:["🍅专注","⏱️效率"],l:"⭐⭐"},
+            {n:37,t:"手绘日记周",d:"每天用简笔画记录生活，图文结合。",g:["🎨手绘","📔日记"],l:"⭐⭐"},
+            {n:38,t:"听书周",d:"通勤时间改听有声书或播客。",g:["🎧听力","📚有声"],l:"⭐"},
+            {n:39,t:"时间记录周",d:"每小时记录做什么，找出时间黑洞。",g:["⏱️时间","📊分析"],l:"⭐⭐"},
+            {n:40,t:"自律打卡周",d:"每天完成任务打卡，建立自律习惯。",g:["✅打卡","📋习惯"],l:"⭐⭐⭐"},
+            {n:41,t:"逆向思维周",d:"选反对观点，从对立角度论证。",g:["🔄逆向","🧠思维"],l:"⭐⭐⭐"},
+            {n:42,t:"专业课程周",d:"每天看一节在线课程，系统学习。",g:["📚课程","🎓学习"],l:"⭐⭐"}
+        ],
+        hea: [
+            {n:43,t:"戒糖周",d:"不喝奶茶、碳酸饮料，不吃甜点，只喝水/茶/黑咖啡。",g:["🏃健康","🥤饮品"],l:"⭐⭐⭐"},
+            {n:44,t:"11点断电周",d:"每晚11点前睡觉，手机放卧室外。",g:["😴睡眠","📱电子"],l:"⭐⭐⭐"},
+            {n:45,t:"冥想入门周",d:"每天冥想10分钟，使用音频引导。",g:["🧘正念","💆放松"],l:"⭐⭐"},
+            {n:46,t:"步行者周",d:"每天走满10000步，或散步40分钟。",g:["🚶运动","🏃步行"],l:"⭐⭐"},
+            {n:47,t:"素食体验周",d:"一周吃素（或仅吃白肉），感受轻盈。",g:["🥗饮食","🍃轻盈"],l:"⭐⭐⭐"},
+            {n:48,t:"家中无座周",d:"在家尽量站立或走动，看电视也站着。",g:["🏠活动","🧍站立"],l:"⭐⭐"},
+            {n:49,t:"彩虹饮食周",d:"每天蔬果包含5种不同颜色。",g:["🌈营养","🥬健康"],l:"⭐⭐"},
+            {n:50,t:"8杯水挑战",d:"每天喝满8杯水（约2升）。",g:["💧饮水","💪健康"],l:"⭐⭐"},
+            {n:51,t:"晨间瑜伽周",d:"每天起床后做15分钟瑜伽或拉伸。",g:["🧘瑜伽","🌅早晨"],l:"⭐⭐"},
+            {n:52,t:"睡前阅读周",d:"每晚睡前读30分钟纸质书。",g:["📖阅读","😴睡眠"],l:"⭐⭐"},
+            {n:53,t:"屏幕戒断周",d:"每天使用电子设备不超过4小时。",g:["📱屏幕","👀视力"],l:"⭐⭐⭐"},
+            {n:54,t:"深呼吸练习周",d:"每天5次深呼吸（4-7-8呼吸法）。",g:["🌬️呼吸","🧘放松"],l:"⭐"},
+            {n:55,t:"拉伸运动周",d:"每天进行全身拉伸10分钟。",g:["🧘拉伸","💪柔韧"],l:"⭐"},
+            {n:56,t:"少油少盐周",d:"饮食少油少盐，清淡饮食。",g:["🥗健康","🏃饮食"],l:"⭐⭐"},
+            {n:57,t:"午休充电周",d:"每天午休20-30分钟。",g:["😴睡眠","⚡能量"],l:"⭐"},
+            {n:58,t:"仰卧起坐周",d:"每天做20个仰卧起坐。",g:["🏋️腹肌","💪运动"],l:"⭐⭐"},
+            {n:59,t:"泡脚养生周",d:"每晚睡前泡脚15分钟。",g:["🛁养生","😴睡眠"],l:"⭐"},
+            {n:60,t:"完全放松周",d:"每天完全放松30分钟（听音乐/冥想/发呆）。",g:["🧘放松","💆休息"],l:"⭐"},
+            {n:61,t:"跳绳挑战周",d:"每天跳绳200下或连续跳3分钟。",g:["💪运动","🏃健身"],l:"⭐⭐"}
+        ],
+        soc: [
+            {n:62,t:"夸夸群主周",d:"每天真诚地夸奖3个人。",g:["💕善意","😊温暖"],l:"⭐⭐"},
+            {n:63,t:"老友记周",d:"联系3个超过半年没说话的朋友打电话或约饭。",g:["📞友谊","🤝社交"],l:"⭐⭐"},
+            {n:64,t:"陌生人微笑周",d:"对保安、保洁、服务员微笑说谢谢。",g:["😊温暖","🤝连接"],l:"⭐"},
+            {n:65,t:"不用表情包周",d:"微信聊天禁止使用任何表情包。",g:["💬表达","✍️文字"],l:"⭐⭐"},
+            {n:66,t:"家庭大厨周",d:"为家人做一顿正餐，或邀请朋友来家里吃饭。",g:["👨‍🍳烹饪","👨‍👩‍👧家庭"],l:"⭐⭐"},
+            {n:67,t:"手写信周",d:"给重要的人手写一封信并寄出去。",g:["✉️手写","💌温暖"],l:"⭐⭐"},
+            {n:68,t:"主动问候周",d:"每天主动问候至少3个人（早安/关心）。",g:["👋问候","🤝连接"],l:"⭐"},
+            {n:69,t:"感谢日记周",d:"每天写下3件感恩的事。",g:["💕感恩","📓记录"],l:"⭐"},
+            {n:70,t:"倾听者周",d:"与他人交谈时，多倾听少说话。",g:["👂倾听","🤝社交"],l:"⭐⭐"},
+            {n:71,t:"线下聚会周",d:"参加至少1次线下社交活动。",g:["🤝社交","🎉聚会"],l:"⭐⭐"},
+            {n:72,t:"志愿服务周",d:"做至少1次志愿服务（线上/线下均可）。",g:["💪志愿","❤️爱心"],l:"⭐⭐⭐"},
+            {n:73,t:"道歉与原谅周",d:"为过去的误会道歉或主动原谅他人。",g:["🤝和解","💕宽恕"],l:"⭐⭐⭐"},
+            {n:74,t:"关心家人周",d:"每天与家人通话或发消息问候。",g:["👨‍👩‍👧家庭","💕亲情"],l:"⭐"},
+            {n:75,t:"赞美同事周",d:"每天真诚赞美1位同事。",g:["💼工作","👍赞美"],l:"⭐"},
+            {n:76,t:"送小礼物周",d:"送给朋友或家人一份小礼物。",g:["🎁礼物","💕关爱"],l:"⭐⭐"}
+        ],
+        cre: [
+            {n:77,t:"手机摄影师周",d:"每天拍一张主题照片（天空/影子/红色物体等）。",g:["📷摄影","🎨艺术"],l:"⭐⭐"},
+            {n:78,t:"晨间日记周",d:"每天早上写3页晨间日记，意识流写作。",g:["✍️写作","📓日记"],l:"⭐⭐⭐"},
+            {n:79,t:"Vlog博主周",d:"每天拍30秒视频，周日剪辑成3分钟短片。",g:["🎥视频","📹创作"],l:"⭐⭐⭐"},
+            {n:80,t:"穿搭博主周",d:"每天精心搭配一套衣服，尝试新风格。",g:["👗穿搭","🎨时尚"],l:"⭐⭐"},
+            {n:81,t:"电影主角周",d:"假装自己是电影主角，出门喷香水，做事有BGM。",g:["🎭表演","🎬电影"],l:"⭐⭐"},
+            {n:82,t:"无手机用餐周",d:"一日三餐禁止看手机，专心咀嚼食物。",g:["🍽️正念","📱戒断"],l:"⭐⭐"},
+            {n:83,t:"365照片周",d:"每天拍1张有故事的照片，记录生活。",g:["📷摄影","📖故事"],l:"⭐⭐"},
+            {n:84,t:"创意手工周",d:"每天做1个小手工（折纸/黏土/编织等）。",g:["✂️手工","🎨创意"],l:"⭐⭐"},
+            {n:85,t:"美食博主周",d:"每天做一道新菜或尝试新美食。",g:["👨‍🍳烹饪","🍳美食"],l:"⭐⭐⭐"},
+            {n:86,t:"诗歌创作周",d:"每天写1首诗或短句。",g:["📝诗歌","✍️创作"],l:"⭐⭐"},
+            {n:87,t:"拼贴艺术周",d:"用旧杂志/报纸做拼贴画。",g:["🎨艺术","♻️环保"],l:"⭐⭐"},
+            {n:88,t:"自作曲周",d:"用手机APP创作1段音乐。",g:["🎵音乐","🎹创作"],l:"⭐⭐⭐"},
+            {n:89,t:"日记插画周",d:"日记配上手绘插图。",g:["🎨插画","📓日记"],l:"⭐⭐"},
+            {n:90,t:"文字游戏周",d:"每天玩填词/成语接龙/文字游戏。",g:["🔤文字","🧠游戏"],l:"⭐"},
+            {n:91,t:"故事接龙周",d:"每天写一个故事开头，让朋友续写。",g:["📖故事","🤝互动"],l:"⭐⭐"},
+            {n:92,t:"表情设计周",d:"设计一套属于自己的表情包。",g:["🎨设计","📱创意"],l:"⭐⭐"},
+            {n:93,t:"家居改造周",d:"用现有物品改造一个小角落。",g:["🏠改造","💡创意"],l:"⭐⭐"},
+            {n:94,t:"旅行规划周",d:"规划一次梦想中的旅行行程。",g:["✈️旅行","🗺️规划"],l:"⭐⭐"},
+            {n:95,t:"人物专访周",d:"采访一位有趣的人，记录故事。",g:["👤专访","📝记录"],l:"⭐⭐⭐"},
+            {n:96,t:"时光胶囊周",d:"给未来的自己写一封信。",g:["💌未来","✍️书写"],l:"⭐⭐"}
+        ]
+    };
+    
+    function render(id, list) {
+        document.getElementById(id).innerHTML = list.map(i => 
+            `<div class="card"><span class="card-num">${i.n}</span><span class="diff">${i.l}</span><h3>${i.t}</h3><p>${i.d}</p><div class="card-tags">${i.g.map(g=>`<span>${g}</span>`).join('')}</div></div>`
+        ).join('');
+    }
+    
+    function show(id) {
+        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+        if(id==='all') document.querySelectorAll('.section').forEach(s=>s.classList.add('active'));
+        else document.getElementById(id).classList.add('active');
+        event.target.classList.add('active');
+    }
+    
+    render('expGrid', data.exp);
+    render('impGrid', data.imp);
+    render('heaGrid', data.hea);
+    render('socGrid', data.soc);
+    render('creGrid', data.cre);
+    
+    // === 自动更新每周挑战 ===
+    const allChallenges = [...data.exp, ...data.imp, ...data.hea, ...data.soc, ...data.cre];
+    
+    // 获取一年中的第几周
+    function getWeekNumber(date) {
+        const d = new Date(date);
+        const onejan = new Date(d.getFullYear(), 0, 1);
+        return Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    }
+    
+    // 获取当前周数
+    const currentWeek = getWeekNumber(new Date());
+    
+    // 根据周数选择挑战（循环使用）
+    const weeklyChallenge = allChallenges[(currentWeek - 1) % allChallenges.length];
+    
+    // 计算本周日期范围
+    const today = new Date();
+    const dayOfWeek = today.getDay() || 7;
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - dayOfWeek + 1);
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6);
+    
+    const formatDate = d => `${d.getMonth()+1}.${d.getDate()}`;
+    const dateRange = `${formatDate(monday)} - ${formatDate(sunday)}`;
+    
+    // 自动更新挑战内容
+    document.getElementById('weekNum').textContent = currentWeek;
+    document.getElementById('title').textContent = weeklyChallenge.t;
+    document.getElementById('desc').textContent = weeklyChallenge.d;
+    document.getElementById('difficulty').textContent = weeklyChallenge.l;
+    document.getElementById('dateRange').textContent = dateRange;
+    
+    // 根据分类生成规则
+    const rules = {
+        exp: ["每天完成挑战核心任务", "记录每天的感受和变化", "在社交媒体分享进展", "完成后总结经验"],
+        imp: ["每天投入至少30分钟", "记录学习笔记或心得", "设置具体的小目标", "周末进行复盘总结"],
+        hea: ["每天坚持完成目标", "注意身体反馈和信号", "保持充足睡眠", "结束后评估身体状态"],
+        soc: ["主动迈出第一步", "真诚对待每一次互动", "结束后维护新建立的关系", "记录温暖的瞬间"],
+        cre: ["每天产出一点作品", "不要追求完美", "记录创作过程中的灵感", "周末整理本周作品集"]
+    };
+    
+    const prefix = weeklyChallenge.n < 23 ? 'exp' : weeklyChallenge.n < 43 ? 'imp' : weeklyChallenge.n < 63 ? 'hea' : weeklyChallenge.n < 77 ? 'soc' : 'cre';
+    document.getElementById('rulesList').innerHTML = rules[prefix].map(r => `<li>${r}</li>`).join('');
+    
+    console.log(`本周挑战已更新：第${currentWeek}周 - ${weeklyChallenge.t}`);
+    </script>
+</body>
+</html>
