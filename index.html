@@ -88,30 +88,9 @@
     </main>
     <footer>
         <p>🌟 每周挑战 - 让生活更有趣 | 每周日更新</p>
-        <p style="margin-top:10px;font-size:0.85rem;">👥 已有 <span id="visitorCount">-</span> 人访问</p>
-    </footer>
+        </footer>
 
-    <!-- 访问统计 -->
-    <script src="https://api.countapi.xyz/js/countapi.js"></script>
-    <script>
-        // 获取访问量
-        fetch('https://api.countapi.xyz/get/weekly-challenge-shiqianliangzai.onrender.com')
-            .then(r => r.json())
-            .then(d => {
-                document.getElementById('visitorCount').textContent = (d.value || 0).toLocaleString();
-            })
-            .catch(() => {
-                // 创建新的访问计数
-                fetch('https://api.countapi.xyz/create?namespace=weekly-challenge-shiqianliangzai.onrender.com&key=visits&enable_reset=1')
-                    .then(r => r.json())
-                    .then(d => {
-                        document.getElementById('visitorCount').textContent = '0';
-                        // 增加访问
-                        fetch('https://api.countapi.xyz/hit/weekly-challenge-shiqianliangzai.onrender.com/visits');
-                    });
-            });
-    </script>
-</body>
+    </body>
 </html>
         exp: [
             {n:1,t:"极简生存周",d:"生活费限制在200元以内（必要账单除外），挑战消费降级。",g:["💰省钱","📉降级"],l:"⭐⭐⭐"},
